@@ -16,6 +16,15 @@ app.use(cors());
 //Directorio publico
 app.use(express.static('public'));
 
+// ... other app.use middleware 
+app.use(express.static(path.join(__dirname, "client", "build")))
+
+// ...
+// Right before your app.listen(), add this:
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
 //Lectura y parseo del body
 app.use(express.json());
 
